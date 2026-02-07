@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skyline Ops Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Aerospace Operations</p>
+        <h1>Skyline Ops Dashboard</h1>
+        <p class="subtitle">Monitor air traffic, weather insights, and operational health in real time.</p>
+      </div>
+      <button class="primary-btn">Generate Daily Brief</button>
+    </header>
+
+    <section class="feature-cards" aria-label="Module switcher">
+      <button class="feature-card is-active" data-module="radar">
+        <span>Flight Radar</span>
+        <small>Live aircraft tracking</small>
+      </button>
+      <button class="feature-card" data-module="weather">
+        <span>Weather Grid</span>
+        <small>Regional outlook</small>
+      </button>
+      <button class="feature-card" data-module="alerts">
+        <span>Alerts Center</span>
+        <small>Prioritized notices</small>
+      </button>
+      <button class="feature-card" data-module="analytics">
+        <span>Analytics Hub</span>
+        <small>Performance insights</small>
+      </button>
+    </section>
+
+    <main class="modules">
+      <section class="module is-active" id="radar" aria-label="Flight radar module">
+        <div class="module-grid">
+          <div class="panel radar-panel">
+            <div class="panel-header">
+              <div>
+                <h2>Flight Radar</h2>
+                <p>Interactive airspace map with live aircraft telemetry.</p>
+              </div>
+              <div class="status-pill">System Nominal</div>
+            </div>
+
+            <div class="map-wrapper">
+              <div class="map-controls">
+                <div class="control-group">
+                  <label for="airlineFilter">Airline</label>
+                  <select id="airlineFilter">
+                    <option value="all">All Carriers</option>
+                  </select>
+                </div>
+                <div class="control-group">
+                  <label for="flightSearch">Flight Search</label>
+                  <input type="search" id="flightSearch" placeholder="Search by flight ID" />
+                </div>
+                <div class="control-group">
+                  <label for="statusFilter">Status</label>
+                  <select id="statusFilter">
+                    <option value="all">All Status</option>
+                    <option value="enroute">En-route</option>
+                    <option value="ascending">Ascending</option>
+                    <option value="descending">Descending</option>
+                  </select>
+                </div>
+                <div class="control-group">
+                  <label for="altitudeFilter">Max Altitude</label>
+                  <input type="range" id="altitudeFilter" min="20000" max="45000" step="1000" value="45000" />
+                  <span id="altitudeValue">45,000 ft</span>
+                </div>
+                <div class="control-group">
+                  <label>Simulation</label>
+                  <button class="ghost-btn" id="toggleSim" type="button">Pause Motion</button>
+                </div>
+              </div>
+
+              <div class="map" id="map" role="img" aria-label="Stylized map showing aircraft positions">
+                <div class="map-grid"></div>
+                <div class="map-overlay">
+                  <div class="map-legend">
+                    <p>Legend</p>
+                    <span><i class="dot enroute"></i> En-route</span>
+                    <span><i class="dot ascending"></i> Ascending</span>
+                    <span><i class="dot descending"></i> Descending</span>
+                  </div>
+                  <div class="map-stats">
+                    <div>
+                      <p>Active Flights</p>
+                      <strong id="activeFlights">0</strong>
+                    </div>
+                    <div>
+                      <p>Avg Altitude</p>
+                      <strong id="avgAltitude">--</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <aside class="panel telemetry-panel">
+            <div class="panel-header">
+              <div>
+                <h2>Flight Details</h2>
+                <p>Hover over a plane to view its telemetry.</p>
+              </div>
+            </div>
+            <div class="telemetry" id="telemetry">
+              <div>
+                <h3>Global Snapshot</h3>
+                <p id="snapshotText">Loading flight telemetry...</p>
+              </div>
+              <div class="telemetry-list" id="telemetryList"></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="module" id="weather" aria-label="Weather module">
+        <div class="module-placeholder">
+          <h2>Weather Grid</h2>
+          <p>Simulated meteorological layers and turbulence heat maps.</p>
+          <div class="placeholder-cards">
+            <div>
+              <h3>Jetstream Velocity</h3>
+              <p>Stable conditions with mild upper-atmosphere winds.</p>
+            </div>
+            <div>
+              <h3>Storm Activity</h3>
+              <p>Isolated convection cells near ATL and LHR.</p>
+            </div>
+            <div>
+              <h3>Visibility Index</h3>
+              <p>92% of routes reporting clear visibility.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="module" id="alerts" aria-label="Alerts module">
+        <div class="module-placeholder">
+          <h2>Alerts Center</h2>
+          <p>High-priority operational notices and live status tracking.</p>
+          <ul class="alert-list">
+            <li>
+              <strong>Runway 14R inspection</strong>
+              <span>JFK - expected clearance in 25 minutes.</span>
+            </li>
+            <li>
+              <strong>ATC reroute advisory</strong>
+              <span>EU corridor traffic redirected via GANDT.</span>
+            </li>
+            <li>
+              <strong>Low fuel reserve</strong>
+              <span>Flight SY204 awaiting gate assignment.</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="module" id="analytics" aria-label="Analytics module">
+        <div class="module-placeholder">
+          <h2>Analytics Hub</h2>
+          <p>Key performance metrics and KPI summaries.</p>
+          <div class="analytics-grid">
+            <div>
+              <h3>On-time Performance</h3>
+              <p>94% flights within 5-minute window.</p>
+            </div>
+            <div>
+              <h3>Fuel Efficiency</h3>
+              <p>+3.2% improvement week-over-week.</p>
+            </div>
+            <div>
+              <h3>Fleet Utilization</h3>
+              <p>78 aircraft currently active across 16 hubs.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
